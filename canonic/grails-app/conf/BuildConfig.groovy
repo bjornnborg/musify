@@ -44,5 +44,7 @@ grails.project.dependency.resolution = {
               ":rest-client-builder:2.1.0") {
             export = false
         }
+        runtime(":hibernate4:4.3.5.4")
+
     }
 }
