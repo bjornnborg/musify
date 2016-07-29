@@ -2,6 +2,8 @@ package meli.musify.canonic.playlist
 
 class Playlist {
 
+    static mapWith = "mongo"
+
     String name
 
     static constraints = {
@@ -9,4 +11,5 @@ class Playlist {
     }
 
     static hasMany = [songs: PlaylistSong]
+    static embedded = ['songs']
 }
