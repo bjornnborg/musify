@@ -1,11 +1,9 @@
 package meli.musify.producer.controller
 
 import grails.test.mixin.TestFor
+import meli.musify.canonic.Song
 import spock.lang.Specification
 
-/**
- * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
- */
 @TestFor(SongRestController)
 class SongRestControllerSpec extends Specification {
 
@@ -17,4 +15,5 @@ class SongRestControllerSpec extends Specification {
 
     void "test something"() {
     }
+
 }
