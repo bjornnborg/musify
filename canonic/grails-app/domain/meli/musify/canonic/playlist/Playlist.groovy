@@ -8,7 +8,7 @@ class Playlist {
     String login
 
     static constraints = {
-        name nullable: false, blank: false
+        name nullable: false, blank: false, unique: ['login']
     }
 
     static hasMany = [songs: PlaylistSong]
