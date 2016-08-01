@@ -4,10 +4,12 @@ import meli.musify.canonic.playlist.Playlist
 
 class PlaylistRestController {
 
+    static responseFormats = ["json", "xml"]
+
     def playlistService
 
     def index() {
-        playlistService.allFrom(user)
+        respond playlistService.allFrom(params.login), status: 200
     }
 
     def save(Playlist playlist) {
