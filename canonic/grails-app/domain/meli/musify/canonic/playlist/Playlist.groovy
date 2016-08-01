@@ -5,6 +5,7 @@ class Playlist {
     static mapWith = "mongo"
 
     String name
+    String login
 
     static constraints = {
         name nullable: false, blank: false
