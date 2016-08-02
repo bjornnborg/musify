@@ -1,6 +1,7 @@
 import grails.converters.JSON
 import meli.musify.canonic.Song
 import meli.musify.canonic.User
+import meli.musify.canonic.command.PlayerCommand
 import meli.musify.canonic.playlist.Playlist
 
 class BootStrap {
@@ -23,6 +24,10 @@ class BootStrap {
             [id: pl.id, login: pl.login, name: pl.name, songs: pl.songs.collect{
                 [songId: it.songId, name: it.name, singer: it.singer]
             }]
+        }
+
+        JSON.registerObjectMarshaller(PlayerCommand){ PlayerCommand c ->
+            [commandType: c.commandType, userId: c.userId, songId: c.songId, playlistId: c.playlistId]
         }
 
     }
