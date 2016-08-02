@@ -2,3 +2,4 @@
 .slcache/
 target/
 *.iml
+*.log
