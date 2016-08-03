@@ -6,6 +6,7 @@ grails.project.work.dir = "target/work"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
+grails.plugin.location.canonic="../canonic"
 
 grails.project.fork = [
     // configure settings for compilation JVM, note that if you alter the Groovy version forked compilation is required
@@ -44,6 +45,7 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
+        mavenRepo "http://git.ml.com:8081/nexus/content/groups/ML"
     }
 
     dependencies {
@@ -51,6 +53,7 @@ grails.project.dependency.resolution = {
         // runtime 'mysql:mysql-connector-java:5.1.29'
         // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
         test "org.grails:grails-datastore-test-support:1.0.2-grails-2.4"
+        compile("com.mercadolibre.opensource.frameworks:restclient:0.8.1"){ excludes "groovy" }
     }
 
     plugins {
