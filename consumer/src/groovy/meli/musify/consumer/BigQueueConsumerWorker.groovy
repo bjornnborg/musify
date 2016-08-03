@@ -1,5 +1,7 @@
 package meli.musify.consumer
 
+import java.util.logging.Logger
+
 class BigQueueConsumerWorker implements Runnable {
 
     BigQueueConsumer consumer
@@ -28,19 +30,16 @@ class BigQueueConsumerWorker implements Runnable {
     private def download() {
         def message
 
-        println "Bora fazer um get em /topics/$consumer.topicName/consumers/$consumer.consumerName/messages"
+        println "Buscando mensagens em /topics/$consumer.topicName/consumers/$consumer.consumerName/messages"
 
         restClientBigQueue.get(
                 uri: "/topics/$consumer.topicName/consumers/$consumer.consumerName/messages".toString(),
                 success: {
-                    println "Recebi a mensagem!"
-                    println it.status.statusCode
-                    println it.data
+                    println "mensagem capturada"
                     message = it.data
                 },
                 failure: {
-                    println "Deu xabú...."
-                    println it?.status
+                    println "erro ao capturar mensagem: " + it?.status
                 }
         )
 
@@ -48,12 +47,20 @@ class BigQueueConsumerWorker implements Runnable {
             return
         }
 
-
         consumer.onDelivery(message)
+        println "Message acknowledge em /topics/$consumer.topicName/consumers/$consumer.consumerName/messages/$message.recipientCallback".toString()
+        restClientBigQueue.delete(
+                uri: "/topics/$consumer.topicName/consumers/$consumer.consumerName/messages/$message.recipientCallback".toString(),
+                success: {
+                    println "Message $message.recipientCallback deleted succesfully"
+                },
+                failure: {
+                    if (it.data) println (it.data)
+                    throw it.exception ?: new RuntimeException("Error removing message: $message.recipientCallback")
+                }
+        )
 
         message
-
-        // remover mensagem / ACK
     }
 
     def stop(){
