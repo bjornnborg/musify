@@ -38,6 +38,7 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
         // runtime 'mysql:mysql-connector-java:5.1.27'
         compile "org.springframework.data:spring-data-mongodb:1.8.0.RELEASE"
+        compile "org.elasticsearch:elasticsearch:2.3.3"
     }
 
     plugins {
