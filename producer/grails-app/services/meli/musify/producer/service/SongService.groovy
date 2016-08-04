@@ -6,9 +6,13 @@ import meli.musify.canonic.Song
 @Transactional
 class SongService {
 
+    def elasticIndexerService
+
     def create(Song song) {
         println "Chamou o seriço para criar música"
         song.save(true)
+        elasticIndexerService.index(song)
+        song
     }
 
     def all() {

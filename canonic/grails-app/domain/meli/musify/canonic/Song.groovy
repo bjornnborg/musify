@@ -1,6 +1,8 @@
 package meli.musify.canonic
 
-class Song {
+import meli.musify.canonic.es.Indexable
+
+class Song implements Indexable {
 
     String name
     String album
@@ -8,5 +10,10 @@ class Song {
 
     static constraints = {
         name nullable: false, blank: false
+    }
+
+    @Override
+    String getType() {
+        return "song"
     }
 }
