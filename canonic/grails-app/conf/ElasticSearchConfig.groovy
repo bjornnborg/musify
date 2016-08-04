@@ -48,7 +48,7 @@ es {
 
             filterKeys = ["id", "name", "album", "singer"]
             renderKeys = ["id", "name", "album", "singer"]
-            //asciifoldingKey = ["username"]
+            asciifoldingKey = ["username"]
 
             fields = [
                     "id": ["type": "LONG", "operators": ["=", "<>", ">=", "<=", "<", ">", "LIST"]],

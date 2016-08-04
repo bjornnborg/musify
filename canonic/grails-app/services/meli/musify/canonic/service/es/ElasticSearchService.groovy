@@ -1,6 +1,8 @@
 package meli.musify.canonic.service.es
 
+import meli.musify.canonic.es.ElasticSearchUtils
 import meli.musify.canonic.es.EsQueryBuilder
+import meli.musify.canonic.utils.StringUtils
 import org.elasticsearch.action.search.SearchRequestBuilder
 import org.elasticsearch.action.search.SearchResponse
 import org.elasticsearch.index.query.ConstantScoreQueryBuilder
