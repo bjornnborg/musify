@@ -1,7 +1,5 @@
 package meli.musify.consumer
 
-import java.util.logging.Logger
-
 class BigQueueConsumerWorker implements Runnable {
 
     BigQueueConsumer consumer
