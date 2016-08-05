@@ -42,7 +42,7 @@ class ElasticSearchService implements InitializingBean {
 
         def indexName = index["name"]
         def indexType = index["types"].find { value -> value == parameters["type"] }
-        def queryText = params["q"]
+        def queryText = parameters["q"]
 
         if (!indexType) {
             throw new Exception("Index type ${parameters['type']} is not valid!")
