@@ -29,7 +29,7 @@ class SongRestController {
         params["index"] = "songs"
         params["type"] = "song"
 
-        def found = elasticSearchService.search(params)
+        def found = elasticSearchService.fullTextSearch(params)
 
         if(!found || !found.results) {
             render status: HttpStatus.NOT_FOUND.value()

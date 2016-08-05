@@ -6,6 +6,7 @@ import meli.musify.canonic.utils.StringUtils
 import org.elasticsearch.action.search.SearchRequestBuilder
 import org.elasticsearch.action.search.SearchResponse
 import org.elasticsearch.index.query.ConstantScoreQueryBuilder
+import org.elasticsearch.index.query.MultiMatchQueryBuilder
 import org.elasticsearch.index.query.QueryBuilder
 import org.elasticsearch.index.query.QueryBuilders
 import org.joda.time.format.DateTimeFormat
@@ -29,6 +30,55 @@ class ElasticSearchService implements InitializingBean {
         }
 
         config = grailsApplication?.config?.es
+    }
+
+    def fullTextSearch(parameters) {
+        log.info("Search - Filtros: ${parameters}")
+
+        def index = config?.indexes?.find { entry -> entry["name"] == parameters["index"] }
+        if (!index) {
+            return Collections.emptyMap()
+        }
+
+        def indexName = index["name"]
+        def indexType = index["types"].find { value -> value == parameters["type"] }
+        def queryText = params["q"]
+
+        if (!indexType) {
+            throw new Exception("Index type ${parameters['type']} is not valid!")
+        }
+
+        def searchConfig = config?.search?.config
+        def fields = searchConfig.filterKeys.findAll{it != "id"}
+
+        MultiMatchQueryBuilder builder = new MultiMatchQueryBuilder(queryText, fields as String[])
+        builder.type(MultiMatchQueryBuilder.Type.MOST_FIELDS)
+
+        def esClient = elasticConfigurationService.createNodeClient(config?.hosts).client();
+        SearchRequestBuilder requestBuilder = esClient.prepareSearch(indexName).setTypes(indexType)
+        requestBuilder.setQuery(builder)
+
+        def offset = parameters["offset"]?: 0
+        def limit = config?.search?.config?.defaultLimit?: 100
+        requestBuilder.setFrom(offset)
+        requestBuilder.setSize(limit)
+
+        SearchResponse esResponse = requestBuilder.execute().actionGet()
+        log.info("Search - Se encontraron ${esResponse.hits.getTotalHits()} resultados")
+
+        /*formateo de la salida*/
+        def renderFields = config.search.config.renderKeys
+        def data = esResponse.hits.getHits().collect {
+            it.source.subMap(renderFields)
+        }
+
+        def paging = [
+                "offset": offset,
+                "limit" : limit,
+                "total" : esResponse.hits.getTotalHits()
+        ]
+
+        return ["paging": paging, "results": data]
     }
 
     def search(parameters) {
