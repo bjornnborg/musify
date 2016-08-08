@@ -1,12 +1,10 @@
 package meli.musify.producer
 
-import com.google.gson.JsonObject
 import com.grailsrocks.functionaltest.*
 import grails.converters.JSON
 import groovy.json.JsonOutput
 import meli.musify.canonic.playlist.Playlist
 import meli.musify.canonic.playlist.PlaylistSong
-import net.sf.json.JSONObject
 import org.springframework.http.HttpStatus
 
 class PlaylistFunctionalTests extends APITestCase {
@@ -23,13 +21,9 @@ class PlaylistFunctionalTests extends APITestCase {
         })
 
         assertStatus(HttpStatus.CREATED.value())
+        def response = getJSON()
+        assert response.id != null
 
-        // Here call get(uri) or post(uri) to start the session
-        // and then use the custom assertXXXX calls etc to check the response
-        //
-        // get('/something')
-        // assertStatus 200
-        // assertContentContains 'the expected text'
     }
 
     private Map getPlaylistObject() {
