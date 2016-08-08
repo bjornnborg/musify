@@ -115,3 +115,11 @@ log4j.main = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+grails {
+    redis {
+        timeout = 2000
+        port = 6379
+        host = "localhost"
+    }
+}
