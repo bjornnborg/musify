@@ -1,0 +1,61 @@
+var url = require('url');
+var querystring = require('querystring');
+var resourceManager = require("../services/resourceManager");
+var jsonHandler = require("../services/jsonHandler");
+var urlMapping = require("../urlMapping");
+
+var userMarksController = {
+	ping : function(request, response) {
+		response.writeHead(200, {
+			'Content-Type' : 'application/json; charset=utf-8'
+		});
+		response.write(JSON.stringify(["pong"]));
+		response.end();        
+	},
+	save : function(request, response) {
+		response.writeHead(201, {
+			'Content-Type' : 'application/json; charset=utf-8'
+		});
+		response.write(JSON.stringify(["Registro Insertado OK"]));
+		response.end();
+	},
+	update : function(request, response) {
+		response.writeHead(200, {
+			'Content-Type' : 'application/json; charset=utf-8'
+		});
+		response.write(JSON.stringify(["Registro Insertado OK"]));
+		response.end();
+	},
+	borrar : function(request, response) {
+		response.writeHead(200, {
+			'Content-Type' : 'application/json; charset=utf-8'
+		});
+		response.write(JSON.stringify(["Registro Eliminado OK"]));
+		response.end();
+	}
+}
+
+exports.ping = userMarksController.ping;
+exports.save = userMarksController.save;
+exports.borrar = userMarksController.borrar;
+exports.update = userMarksController.update;
+
+// Mappings
+urlMapping.add ([
+	{
+		pattern: '^/fraud/usermarks/ping',
+		action: {
+			'GET':userMarksController.ping
+		}
+	},
+	{
+		pattern: '^/fraud/user/[0-9]+/marks',
+		action: {
+			'POST':userMarksController.save,
+			'PUT':userMarksController.update,
+			'DELETE':userMarksController.borrar
+		}
+	}
+]);
+
+

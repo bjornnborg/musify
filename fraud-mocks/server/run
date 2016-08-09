@@ -1,0 +1,13 @@
+#!/bin/bash
+
+NODE_RUN=`which node`
+
+echo "NODE: $NODE_RUN"
+
+if [ -z "$NODE_RUN" ]
+then
+	echo "Node no instalado"
+else
+	$NODE_RUN mock.js
+fi
+

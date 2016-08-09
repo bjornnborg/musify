@@ -1,0 +1,10 @@
+CHANGELOG
+
+Versión 1.1.8 - (NTORRES y FGONZALES)
+- Mocks PaymentsSearch - Cambio de Wrapper por DOC x Collector
+- Mocks Withdraw - Cambio de Wrapper por DOC x Collector
+
+Versión 0.0.1 - MARANDA
+- Mocks paymentSearch para IVS por EMAIL
+- Mocks cards para ivs por EMAIL
+- Mocks owRestrictionService para IVS por EMAIL
