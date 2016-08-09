@@ -1,10 +1,7 @@
 package meli.musify.producer
 
 import com.grailsrocks.functionaltest.*
-import grails.converters.JSON
 import groovy.json.JsonOutput
-import meli.musify.canonic.playlist.Playlist
-import meli.musify.canonic.playlist.PlaylistSong
 import org.springframework.http.HttpStatus
 
 class PlaylistFunctionalTests extends APITestCase {
