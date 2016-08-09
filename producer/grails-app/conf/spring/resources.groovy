@@ -11,13 +11,11 @@ beans = {
     }
 
     Environment.executeForCurrentEnvironment {
-        println "Configurando o ambiente!"
         test {
             restClient(SimpleRestClient) { bean ->
                 baseUrl = "http://fraud-mocks:8888"
             }
         }
     }
-
 
 }
