@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus
 
 class PlaylistFunctionalTests extends APITestCase {
 
-    private static final String BASE_URL = "http://localhost:7070/producer/playlistRest"
+    private static final String BASE_URL = "http://localhost:8080/producer/playlistRest"
 
     void testCreatePlaylistSuccessfull() {
 
