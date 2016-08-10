@@ -4,6 +4,7 @@ import grails.converters.JSON
 import grails.transaction.Transactional
 import groovy.json.JsonOutput
 import meli.musify.canonic.command.PlayerCommand
+import meli.musify.canonic.exception.InfrastructureException
 
 @Transactional
 class PlayerService {
@@ -11,10 +12,7 @@ class PlayerService {
     def restClient
 
     def registerCommand(PlayerCommand command) {
-
         sendMessage(command)
-        //createTopic("musify_songs_events")
-
     }
 
     private def sendMessage(PlayerCommand command) {
@@ -26,22 +24,9 @@ class PlayerService {
                     println "Evento adicionado à fila"
                 },
                 failure: { resp ->
-                    println "Erro ao enfileirar evento"
+                    throw new InfrastructureException(resp.exception.message, resp.exception)
                 }
         )
     }
 
-    private def createTopic(String topic) {
-        restClient.post(
-                uri: "/topics",
-                headers: ["Content-Type": "application/json"],
-                data: JsonOutput.toJson([name: topic]),
-                success: { resp ->
-                    println "Topico criado com sucesso!"
-                },
-                failure: { resp ->
-                    println "Erro ao criar tópico"
-                }
-        )
-    }
 }
