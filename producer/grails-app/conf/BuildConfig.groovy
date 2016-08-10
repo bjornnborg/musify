@@ -13,7 +13,11 @@ grails.project.fork = [
     //  compile: [maxMemory: 256, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
 
     // configure settings for the test-app JVM, uses the daemon by default
-    test: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
+    //test: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
+
+    // Avoids java.lang.ClassNotFoundException: org.jetbrains.groovy.grails.rt.GrailsIdeaTestListener on test startup
+    // If you want to use vm fork, you'll need to copy grails-rt.jar from <intellij_home>/plugins/grails/lib inside your app/lib
+    //test: false,
     // configure settings for the run-app JVM
     run: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
     // configure settings for the run-war JVM
@@ -67,12 +71,12 @@ grails.project.dependency.resolution = {
         compile ":scaffolding:2.1.2"
         compile ':cache:1.1.8'
         compile ":asset-pipeline:2.1.5"
+        compile "org.grails.plugins:functional-test:2.0.0"
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.8.1" // or ":hibernate:3.6.10.18"
         runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
-        compile "org.grails.plugins:functional-test:2.0.0"
 
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.9.0"
