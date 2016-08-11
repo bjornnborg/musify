@@ -8,9 +8,14 @@ class PlayerRestController {
 
     def playerService
 
+    def index() {
+
+    }
+
     def executeCommand(PlayerCommand command) {
         println "recebido o comando " + command.commandType
         playerService.registerCommand(command)
         respond command, status: 201
     }
+
 }
