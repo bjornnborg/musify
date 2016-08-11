@@ -21,14 +21,14 @@ class SongRestIntegrationSpec extends IntegrationSpec {
             def controller = new SongRestController(songService: songService)
 
         when: "index action is called"
-        controller.index()
+            controller.index()
 
         then: "it returns the expected songs list as json"
-        controller.response.json*.name == [
-                "A Song",
-                "New Song",
-                "The Song"
-        ]
+            controller.response.json*.name == [
+                    "A Song",
+                    "New Song",
+                    "The Song"
+            ]
 
     }
 
