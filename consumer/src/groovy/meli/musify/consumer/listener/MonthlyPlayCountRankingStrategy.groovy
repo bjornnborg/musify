@@ -1,6 +1,7 @@
 package meli.musify.consumer.listener
 
 import grails.plugin.redis.RedisService
+import meli.musify.consumer.utils.RedisUtils
 import redis.clients.jedis.Jedis
 
 import java.text.DateFormat
@@ -25,8 +26,7 @@ class MonthlyPlayCountRankingStrategy implements SongEventListener {
     @Override
     void execute(message, song) {
         redisService.withRedis { Jedis redis ->
-            String monthlyPlayedRankingKey = String.format("songs:monthly:playCount:%s", MONTHLY_PLAY_COUNT_RANKING_KEY_FORMAT.format(new Date()))
-            redis.zincrby(monthlyPlayedRankingKey, 1, String.format(SONG_RECORD_FORMAT, song.id, song.name, song.album))
+            redis.zincrby(RedisUtils.getMonthlyPlayedRankingKey(), 1, RedisUtils.getSongRecord(song))
         }
     }
 }
