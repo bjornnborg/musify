@@ -20,7 +20,7 @@
     <button id="elastic-search-action" ng-click="doElasticSearch(search.term)" ng-disabled="!search.term">Go!</button>
 
     <ul>
-        <li ng-repeat="s in foundSongs">{{s.name}} / {{s.album}} / {{s.singer}}<button ng-click="firePlay(s)">{{getLabel(s)}}</button><button ng-click="play(s)">Add to Playlist</button></li>
+        <li ng-repeat="s in foundSongs">{{s.name}} / {{s.album}} / {{s.singer}}<button ng-click="firePlay(s)">{{getLabel(s)}}</button></li>
     </ul>
 
 </div>
