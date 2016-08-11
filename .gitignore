@@ -1,5 +1,6 @@
 .idea/
 .slcache/
+.misc/
 target/
 *.iml
 *.log
