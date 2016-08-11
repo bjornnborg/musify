@@ -27,7 +27,7 @@ class BootStrap {
         }
 
         JSON.registerObjectMarshaller(PlayerCommand){ PlayerCommand c ->
-            [commandType: c.commandType, userId: c.userId, songId: c.songId, playlistId: c.playlistId, atSecond: c.atSecond]
+            [commandType: c.commandType, userId: c.userId, songId: c.songId, playlistId: c.playlistId, atSecond: c.atSecond, increment: c.increment]
         }
 
     }

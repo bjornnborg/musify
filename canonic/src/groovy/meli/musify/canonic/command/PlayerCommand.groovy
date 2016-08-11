@@ -10,6 +10,7 @@ class PlayerCommand {
     Long songId
     Long playlistId
     Long atSecond
+    Long increment
 
     static constraints ={
         playlistId nullable: true
