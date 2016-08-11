@@ -21,8 +21,8 @@ class StatisticsService {
         redisService.withRedis { Jedis redis ->
             def playCountKey = MONTHLY_PLAYED_RANKING_KEY_FORMAT.format(new Date())
             def playTimeKey = MONTHLY_PLAYING_RANKING_KEY_FORMAT.format(new Date())
-            songsRanking["playCount"] =  redis.zrevrangeWithScores(String.format("songs:monthly:played:%s", playCountKey), 0, 10)
-            songsRanking["playTime"] =  redis.zrevrangeWithScores(String.format("songs:monthly:playing:%s", playTimeKey), 0, 10)
+            songsRanking["playCount"] =  redis.zrevrangeWithScores(String.format("songs:monthly:playCount:%s", playCountKey), 0, 10)
+            songsRanking["playTime"] =  redis.zrevrangeWithScores(String.format("songs:monthly:playingCount:%s", playTimeKey), 0, 10)
         }
 
         songsRanking["playCount"] =  songsRanking["playCount"].collect {
