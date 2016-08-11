@@ -20,6 +20,6 @@ class PlayerFunctionalTests extends APITestCase {
     }
 
     private Map getEventObject() {
-        [commandType: "play", userId: 1, songId: 1, atSecond: 0]
+        [commandType: "play", userId: 1, songId: 1, atSecond: 0, increment: 0]
     }
 }
