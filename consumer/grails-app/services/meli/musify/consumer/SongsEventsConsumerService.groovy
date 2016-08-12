@@ -31,8 +31,7 @@ class SongsEventsConsumerService implements BigQueueConsumer {
     @Override
     @Transactional
     void onDelivery(Object message) {
-        println message
-        def song = Song.where {id == message.msg.songId}.find()
+        def song = Song.where { id == message.msg.songId }.find()
 
         strategiesByEvent[message.msg.commandType].each {
             it.execute(message, song)
