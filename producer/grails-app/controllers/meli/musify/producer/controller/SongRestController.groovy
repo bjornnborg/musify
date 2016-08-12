@@ -12,15 +12,15 @@ class SongRestController {
     def elasticSearchService
 
     def index() {
-        respond songService.all(), status: 200
+        respond songService.all(), status: HttpStatus.OK.value()
     }
 
     def save(Song song) {
         if (!song.hasErrors()) {
             def newSong = songService.create(song)
-            respond newSong, status: 201
+            respond newSong, status: HttpStatus.CREATED.value()
         } else {
-            respond status: 422
+            respond status: HttpStatus.UNPROCESSABLE_ENTITY.value()
         }
     }
 

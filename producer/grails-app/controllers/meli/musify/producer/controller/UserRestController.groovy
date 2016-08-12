@@ -1,6 +1,7 @@
 package meli.musify.producer.controller
 
 import meli.musify.canonic.User
+import org.springframework.http.HttpStatus
 
 class UserRestController {
 
@@ -9,15 +10,15 @@ class UserRestController {
     def userService
 
     def index() {
-        respond userService.all(), status: 200
+        respond userService.all(), status: HttpStatus.OK.value()
     }
 
     def save(User user) {
         if (!user.hasErrors()) {
             def newUser = userService.create(user)
-            respond newUser, status: 201
+            respond newUser, status: HttpStatus.CREATED.value()
         } else {
-            respond status: 422
+            respond status: HttpStatus.UNPROCESSABLE_ENTITY.value()
         }
     }
 }
