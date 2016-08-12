@@ -55,3 +55,35 @@ Se recomienda utilizar el puerto 7070
 
 #### Iniciar la aplicación consumidor ####
 Se recomienda utilizar el puerto 8080
+
+### Uso de la aplicación ###
+
+### Utilizar el proyecto del productor para crear un usuario ###
+`curl --data 'login=user@email.com' http://localhost:7070/producer/userRest/save`
+
+### Utilizar el proyecto del productor para crear unas canciónes ###
+`curl --data 'name=Bad&album=MJ Greatest Hits&singer=Michael Jackson' http://localhost:7070/producer/songRest/save`
+
+`curl --data 'name=Grenade&album=BM Greatest Hits&singer=Bruno Mars' http://localhost:7070/producer/songRest/save`
+
+### Utilizar el proyecto del productor para crear una playlist con su canciónes ###
+`curl -H "Content-Type: application/json" -d '{"name": "Party Playlist", "login": "user@email.com", "songs":[{"name": "Bad", "singer": "Michael Jackson", "songId": 1}, {"name": "Grenade", "singer": "Bruno Mars", "songId": 2}] }' http://localhost:7070/producer/playlistRest/save`
+
+### Utilizar el proyecto del productor para obtener las listas de reproduccións ###
+`curl http://localhost:7070/producer/playlistRest?login=user@email.com`
+
+Por desgracia sólo se puede manipular la lista de reproducción desde la línea de comandos y no se puede hacer adiciones o supresiones
+
+#### Iniciar la aplicación consumidor ####
+Se recomienda utilizar el puerto 8080
+
+#### Acceder a la interfaz web ####
+http://localhost:7070/producer/playerRest
+
+Busque una de las canciones creadas para reproducir y detener todas las veces que desee.
+
+El proyecto productor utilizará el Elastic Search para encontrar canciones con la palabra informado. Cuando un comienzo canción que está sonando se envía un evento al servidor y será consumida por el proyecto de los consumidores.
+
+Los datos sobre cada canción se registrarán en redis, así como el uso de la clasificación.
+
+Mira Javascript consola de información de depuración y la continuidad de los acontecimientos
