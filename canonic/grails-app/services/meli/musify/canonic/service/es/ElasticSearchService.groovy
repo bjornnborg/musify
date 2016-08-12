@@ -32,6 +32,10 @@ class ElasticSearchService implements InitializingBean {
         config = grailsApplication?.config?.es
     }
 
+    /**
+     * Uso de Multi Match Search para la búsqueda de un término en diferentes campos del catálogo de música.
+     * Devuelve los resultados más importantes primero
+     */
     def fullTextSearch(parameters) {
         log.info("Search - Filtros: ${parameters}")
 
@@ -42,6 +46,8 @@ class ElasticSearchService implements InitializingBean {
 
         def indexName = index["name"]
         def indexType = index["types"].find { value -> value == parameters["type"] }
+
+        /* Palabra que desea buscar */
         def queryText = parameters["q"]
 
         if (!indexType) {
@@ -52,6 +58,7 @@ class ElasticSearchService implements InitializingBean {
         def fields = searchConfig.filterKeys.findAll{it != "id"}
 
         MultiMatchQueryBuilder builder = new MultiMatchQueryBuilder(queryText, fields as String[])
+        /* Aumenta la puntuación para cada campo que contiene el término de búsqueda */
         builder.type(MultiMatchQueryBuilder.Type.MOST_FIELDS)
 
         def esClient = elasticConfigurationService.createNodeClient(config?.hosts).client();
@@ -81,6 +88,12 @@ class ElasticSearchService implements InitializingBean {
         return ["paging": paging, "results": data]
     }
 
+    /**
+     * A partir de aquí no se está utilizando.
+     * Sólo una referencia a la utilización de linguaguem consulta de elastic search.
+     *
+     * He preferido para explorar la búsqueda de texto
+     */
     def search(parameters) {
 
         log.info("Search - Filtros: ${parameters}")
