@@ -11,10 +11,16 @@ class PlayerService {
 
     def restClient
 
+    /**
+     * Método que se llama para indicar que un evento se ha generado por el player
+     */
     def registerCommand(PlayerCommand command) {
         sendMessage(command)
     }
 
+    /**
+     * Envía datos acerca de una canción para ser procesado de forma asíncrona
+     */
     private def sendMessage(PlayerCommand command) {
         restClient.post(
                 uri: "/messages",
