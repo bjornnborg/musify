@@ -1,6 +1,7 @@
 package meli.musify.consumer.listener
 
 import grails.plugin.redis.RedisService
+import meli.musify.consumer.utils.RedisUtils
 import redis.clients.jedis.Jedis
 
 class SongPlayingCountStrategy implements SongEventListener {
@@ -20,8 +21,7 @@ class SongPlayingCountStrategy implements SongEventListener {
     @Override
     void execute(message, song) {
         redisServce.withRedis {Jedis redis ->
-            String songPlayTimeKey = String.format("songs:playingCount:%s", message.msg.songId)
-            redis.incrBy(songPlayTimeKey, message.msg.increment?: 5)
+            redis.incrBy(RedisUtils.getSongPlayingCountKey(), message.msg.increment?: 5)
         }
     }
 }

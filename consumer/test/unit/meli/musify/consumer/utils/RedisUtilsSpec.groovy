@@ -42,6 +42,16 @@ class RedisUtilsSpec extends Specification {
             key_name == "songs:playCount:" + song.id
     }
 
+    void "must generate playing count key for a songs"() {
+        given: "some song"
+            def song = new Song(name: "Da Song", album: "Album")
+            song.id = 37
+        when: "we ask for the key name"
+            def key_name = RedisUtils.getSongPlayingCountKey(song)
+        then: "key name and format must match"
+            key_name == "songs:playingCount:" + song.id
+    }
+
     void "must format a song for writing"() {
         given: "a source song"
             def song = new Song(name: "Da Song", album: "Album")
