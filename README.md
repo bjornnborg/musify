@@ -20,7 +20,9 @@ Este proyecto hace uso de las siguientes herramientas o frameworks:
 El proyecto se divide en la siguiente estructura:
 
 **Productor**: aplicación web (se recomienda subir el puerto 7070)
+
 **Consumidores**: aplicación web (recomendada boca arriba en el puerto 8080)
+
 **Canónica**: Plugin de las clases y de la configuración compartida entre los proyectos
 
 El productor proyecto es responsable de permitir la inclusión de los datos básicos para permitir que el funcionamiento de la aplicación.
