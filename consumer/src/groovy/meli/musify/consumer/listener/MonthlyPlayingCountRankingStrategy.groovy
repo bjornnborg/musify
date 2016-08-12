@@ -7,6 +7,9 @@ import redis.clients.jedis.Jedis
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 
+/**
+ * Clasificación de las canciones escuchadas por más tiempo en el mes
+ */
 class MonthlyPlayingCountRankingStrategy implements SongEventListener {
 
     def redisService

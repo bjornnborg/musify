@@ -14,6 +14,9 @@ class StatisticsService {
 
     def redisService;
 
+    /**
+     * Devuelve un mapa de dos clasificaciones: las canciones más reproducidas y las canciones escuchadas por más tiempo
+     */
     def songsPlayingStatistics() {
 
         def songsRanking = [:]
@@ -21,6 +24,7 @@ class StatisticsService {
         redisService.withRedis { Jedis redis ->
             def playCountKey = MONTHLY_PLAYED_RANKING_KEY_FORMAT.format(new Date())
             def playTimeKey = MONTHLY_PLAYING_RANKING_KEY_FORMAT.format(new Date())
+            /* Se utiliza scoring reverso para construcción de la clasificación */
             songsRanking["playCount"] =  redis.zrevrangeWithScores(String.format("songs:monthly:playCount:%s", playCountKey), 0, 10)
             songsRanking["playTime"] =  redis.zrevrangeWithScores(String.format("songs:monthly:playingCount:%s", playTimeKey), 0, 10)
         }

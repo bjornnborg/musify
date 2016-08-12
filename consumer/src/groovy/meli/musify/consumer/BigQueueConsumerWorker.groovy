@@ -1,5 +1,8 @@
 package meli.musify.consumer
 
+/**
+ * Recupera mensajes en BigQueue y la entrega al consumidor
+ */
 class BigQueueConsumerWorker implements Runnable {
 
     BigQueueConsumer consumer

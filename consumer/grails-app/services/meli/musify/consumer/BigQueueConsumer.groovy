@@ -4,6 +4,9 @@ import javax.annotation.PreDestroy
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
+/**
+ * Es un consumidor de las mensajes del BigQueue
+ */
 trait BigQueueConsumer {
 
     String consumerName

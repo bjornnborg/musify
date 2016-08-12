@@ -4,6 +4,9 @@ import grails.plugin.redis.RedisService
 import meli.musify.consumer.utils.RedisUtils
 import redis.clients.jedis.Jedis
 
+/**
+ * Clasificación de las veces que una canción se ha jugado desde que fue incluido en el catálogo
+ */
 class SongPlayCountStrategy implements SongEventListener {
 
     def redisService

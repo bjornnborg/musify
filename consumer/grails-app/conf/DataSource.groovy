@@ -34,6 +34,7 @@ environments {
 
         grails {
             redis {
+                // Utiliza un bucket diferente para las pruebas
                 database = 1
             }
         }

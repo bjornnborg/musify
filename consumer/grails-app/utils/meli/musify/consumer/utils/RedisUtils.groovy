@@ -3,6 +3,9 @@ package meli.musify.consumer.utils
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 
+/**
+ * Los utilitários para Redis
+ */
 class RedisUtils {
 
     public static final String SONG_PLAY_COUNT_KEY_PREFFIX = "songs:playCount:%s"

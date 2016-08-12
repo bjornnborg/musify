@@ -6,6 +6,7 @@ class BootStrap {
 
     def init = { servletContext ->
         grailsApplication.getMainContext().getBeansOfType(BigQueueConsumer).each { beanName, bean ->
+            // Inicia todos los consumidores detectores de eventos
             bean.start()
         }
     }
