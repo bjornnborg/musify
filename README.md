@@ -40,3 +40,18 @@ También puede buscar y reproducir la música creada, y ver un ranking a través
 El proyecto consumidor recibe los eventos de la cola de BigQueue y genera estadísticas sobre cada canción. La información generada se almacena en los corrales.
 
 A pesar de que el consumidor tiene un controlador para ver el ranking de las canciones más escuchadas, que ya está disponible en la interfaz web del proyecto productor. Por lo tanto, no hay necesidad de interactuar con el proyecto de los consumidores.
+
+
+### Configuración ###
+
+#### Criar um tópico en el BigQueue com lo nombre musify_songs_events ####
+`curl -d'{"name":"musify_songs_events"}' 127.0.0.1:8081/topics -H"Content-Type: application/json"`
+
+#### Crear un consumidor con el nombre song_events_consumer ####
+`curl -d'{"name":"song_events_consumer"}' 127.0.0.1:8081/topics/test_topic/consumers -H"Content-Type: application/json"`
+
+#### Iniciar la aplicación productor ####
+Se recomienda utilizar el puerto 7070
+
+#### Iniciar la aplicación consumidor ####
+Se recomienda utilizar el puerto 8080
