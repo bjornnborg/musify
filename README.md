@@ -28,9 +28,12 @@ El proyecto se divide en la siguiente estructura:
 El productor proyecto es responsable de permitir la inclusión de los datos básicos para permitir que el funcionamiento de la aplicación.
 
 Se le permite incluir y hacer referencia a la siguiente información por medio de comandos curl:
- - Los usuarios ( `curl --data 'login=bjornnborg@gmail.com' http://localhost:7070/producer/userRest/save` )
- - Música ( `curl --data 'name=Billie Jean&album=MJ Greatest Hits&singer=Michael Jackson' http://localhost:7070/producer/songRest/save` )
- - Listas de reproducción ( `curl --data 'name=Party Selection&login=bjornnborg@gmail.com&songs[0].name=Bad&songs[0].singer=Michael Jackson&songs[0].songId=1&songs[1].name=Billie Jean&songs[1].singer=Michael Jackson&songs[1].songId=2' http://localhost:7070/producer/playListRest/save` )
+ - Los usuarios
+ - Música
+ - Listas de reproducción
 
+También puede buscar y reproducir la música creada, y ver un ranking a través de la interfaz web.
 
-También puede buscar y reproducir la música creada, y ver un ranking a través de la interfaz web: [http://localhost:7070/producer/playerRest](http://localhost:7070/producer/playerRest)
+El proyecto consumidor recibe los eventos de la cola de BigQueue y genera estadísticas sobre cada canción. La información generada se almacena en los corrales.
+
+A pesar de que el consumidor tiene un controlador para ver el ranking de las canciones más escuchadas, que ya está disponible en la interfaz web del proyecto productor. Por lo tanto, no hay necesidad de interactuar con el proyecto de los consumidores.
