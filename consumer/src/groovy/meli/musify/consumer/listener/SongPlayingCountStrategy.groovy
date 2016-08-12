@@ -21,7 +21,7 @@ class SongPlayingCountStrategy implements SongEventListener {
     @Override
     void execute(message, song) {
         redisServce.withRedis {Jedis redis ->
-            redis.incrBy(RedisUtils.getSongPlayingCountKey(), message.msg.increment?: 5)
+            redis.incrBy(RedisUtils.getSongPlayingCountKey(song), message.msg.increment?: 5)
         }
     }
 }
