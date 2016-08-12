@@ -31,6 +31,13 @@ environments {
             dbCreate = "update"
             url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
         }
+
+        grails {
+            redis {
+                database = 1
+            }
+        }
+
     }
     production {
         dataSource {
@@ -57,5 +64,13 @@ environments {
                defaultTransactionIsolation = java.sql.Connection.TRANSACTION_READ_COMMITTED
             }
         }
+    }
+}
+
+grails {
+    redis {
+        timeout = 2000
+        port = 6379
+        host = "localhost"
     }
 }
