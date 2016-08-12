@@ -4,13 +4,7 @@ import grails.plugin.redis.RedisService
 import meli.musify.consumer.utils.RedisUtils
 import redis.clients.jedis.Jedis
 
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-
 class MonthlyPlayCountRankingStrategy implements SongEventListener {
-
-    DateFormat MONTHLY_PLAY_COUNT_RANKING_KEY_FORMAT = new SimpleDateFormat("MM-yyyy")
-    String SONG_RECORD_FORMAT = "%s;%s - %s"
 
     def redisService
 
