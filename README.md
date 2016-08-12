@@ -79,7 +79,7 @@ Se recomienda utilizar el puerto 8080
 
 #### Acceder a la interfaz web ####
 
-http://localhost:7070/producer/playerRest
+[http://localhost:7070/producer/playerRest](http://localhost:7070/producer/playerRest)
 
 Busque una de las canciones creadas para reproducir y detener todas las veces que desee.
 
