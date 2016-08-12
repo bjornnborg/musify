@@ -31,4 +31,4 @@ Se le permite incluir y hacer referencia a la siguiente información por medio d
  - Listas de reproducción ( `curl --data 'name=Party Selection&login=bjornnborg@gmail.com&songs[0].name=Bad&songs[0].singer=Michael Jackson&songs[0].songId=1&songs[1].name=Billie Jean&songs[1].singer=Michael Jackson&songs[1].songId=2' http://localhost:7070/producer/playListRest/save` )
 
 
-También puede buscar y reproducir la música creada, y ver un ranking a través de la interfaz web: http://localhost:7070/producer/playerRest
+También puede buscar y reproducir la música creada, y ver un ranking a través de la interfaz web: [http://localhost:7070/producer/playerRest](http://localhost:7070/producer/playerRest)
