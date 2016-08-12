@@ -8,16 +8,22 @@ import meli.musify.consumer.listener.MonthlyPlayCountRankingStrategy
 import meli.musify.consumer.listener.SongPlayingCountStrategy
 import javax.annotation.PostConstruct
 
+/**
+ * Es un consumidor de las mensajes de eventos creados por el player en el BigQueue
+ */
 class SongsEventsConsumerService implements BigQueueConsumer {
 
     String topicName = "musify_songs_events"
     String consumerName = "song_events_consumer"
 
     def redisService
+
+    /* Podemos querer hacer más de una cosa para cada tipo de evento creado para una canción */
     def strategiesByEvent = [:]
 
     @PostConstruct
     void configureStrategies() {
+        /* Objetos interesado en los acontecimientos de una canción */
         def strategies = [
                 new SongPlayCountStrategy(redisService),
                 new SongPlayingCountStrategy(redisService),
@@ -28,6 +34,9 @@ class SongsEventsConsumerService implements BigQueueConsumer {
         strategiesByEvent["listening"] = strategies.findAll {it.accept("listening")}
     }
 
+    /**
+     * Procesa un mensaje entrante desde el BigQueue
+     */
     @Override
     @Transactional
     void onDelivery(Object message) {

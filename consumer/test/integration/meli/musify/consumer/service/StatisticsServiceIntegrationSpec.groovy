@@ -7,6 +7,15 @@ import meli.musify.consumer.utils.RedisUtils
 import redis.clients.jedis.Jedis
 import spock.lang.Shared
 
+/**
+ * Se lleva a cabo dos tipos de pruebas al mismo tiempo:
+ *
+ * 1 - Pruebas el mensaje BigQueue a los consumidores, para entregar un mensaje directamente a él.
+ * 2 - Prueba de la clasificación de la construcción de las canciones.
+ *
+ * Los dos servicios anteriores dependen de las plumas. Como no fue posible crear una maqueta ya llevado
+ * a cabo 2 pruebas al mismo tiempo
+ */
 class StatisticsServiceIntegrationSpec extends IntegrationSpec {
 
     def statisticsService
