@@ -6,6 +6,9 @@ import org.springframework.beans.factory.InitializingBean
 
 import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder
 
+/**
+ * Los utilitários del Elastic Search
+ */
 class ElasticSearchUtilsService implements InitializingBean {
 
     static transactional = false

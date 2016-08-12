@@ -2,6 +2,10 @@ package meli.musify.canonic.command
 
 import grails.validation.Validateable
 
+/**
+ * Es un evento creado por el player, tales como iniciar la reproducción de una canción o indican que una canción
+ * se está reproduciendo
+ */
 @Validateable
 class PlayerCommand {
 

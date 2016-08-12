@@ -6,11 +6,17 @@ import org.elasticsearch.common.xcontent.XContentBuilder
 import org.elasticsearch.index.VersionType
 import org.elasticsearch.index.engine.VersionConflictEngineException
 
+/**
+ * La indexación del Elastic Search
+ */
 class ElasticIndexerService {
 
     def elasticSearchUtilsService
     def elasticConfigurationService
 
+    /**
+     * Añadir un objeto candidato al catálogo de indexación.
+     */
     def index(Indexable toIndex) {
 
         try{

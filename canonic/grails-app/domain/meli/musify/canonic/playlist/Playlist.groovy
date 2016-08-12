@@ -1,5 +1,9 @@
 package meli.musify.canonic.playlist
 
+/**
+ * Es una lista de reproducción de un usuario.
+ * Los datos se escriben en MongoDB, con las canciones de forma anidada para facilitar la búsqueda y visualización
+ */
 class Playlist {
 
     static mapWith = "mongo"

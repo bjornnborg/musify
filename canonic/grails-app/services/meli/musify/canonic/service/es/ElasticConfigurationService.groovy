@@ -8,6 +8,9 @@ import org.elasticsearch.node.Node
 import org.elasticsearch.node.NodeBuilder
 import org.springframework.beans.factory.InitializingBean
 
+/**
+ * Las configuraciones del Elastic Search
+ */
 class ElasticConfigurationService implements InitializingBean {
 
     static transactional = false

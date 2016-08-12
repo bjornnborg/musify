@@ -1,5 +1,8 @@
 package meli.musify.canonic.utils
 
+/**
+ * Los utilitários para Strings
+ */
 public final class StringUtils {
 
     public static String removeExcessiveSpaces(String word) {
