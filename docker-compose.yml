@@ -4,6 +4,14 @@ networks:
     driver: bridge
 
 services:
+  redis-service:
+    image: 'redis:5'
+    container_name: musify-redis
+    networks:
+      - my-network
+    ports:
+      - '6379:6379'
+
   mongo-service:
     image: 'mongo:3.2'
     container_name: musify-mongo
@@ -42,8 +50,6 @@ services:
       dockerfile: ./producer.dockerfile
       context: .
     command: /bin/bash -l -c 'grails run-app'
-    volumes:
-      - .:/budget-on-sight
     container_name: musify-producer
     networks:
       - my-network
@@ -53,10 +59,24 @@ services:
       - mysql-service
       - elastic-service
       - mongo-service
+      - redis-service
     links:
       - mysql-service
       - elastic-service
       - mongo-service
+      - redis-service
 
-#volumes:
-#  db_data:
+#  consumer:
+#    build:
+#      dockerfile: ./consumer.dockerfile
+#      context: .
+#    command: /bin/bash -l -c 'grails run-app'
+#    container_name: musify-consumer
+#    networks:
+#      - my-network
+#    ports:
+#      - '8081:8080'
+#    depends_on:
+#      - redis-service
+#    links:
+#      - redis-service

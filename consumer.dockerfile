@@ -15,14 +15,14 @@ RUN set -x \
 RUN /bin/bash -l -c 'sdk install grails 2.5.0'
 
 RUN mkdir -p /root/.m2
-RUN mkdir -p /producer
+RUN mkdir -p /consumer
 RUN mkdir -p /canonic
-COPY ./producer /producer
+COPY ./consumer /consumer
 COPY ./canonic /canonic
 # dont forget to bring m2 to m2_temp using script
 COPY ./m2_temp/ /root/.m2/
 
-WORKDIR /producer
+WORKDIR /consumer
 
 RUN /bin/bash -l -c 'grails compile'
 EXPOSE 8080
