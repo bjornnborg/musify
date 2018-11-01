@@ -59,6 +59,12 @@ grails {
         // escapes all not-encoded output at final stage of outputting
         // filteringCodecForContentType.'text/html' = 'html'
     }
+
+    mongo {
+        host = "musify-mongo"
+        databaseName = "musify"
+        port = 27017
+    }
 }
 
 
@@ -90,6 +96,7 @@ grails.hibernate.osiv.readonly = false
 environments {
     development {
         grails.logging.jul.usebridge = true
+        grails.dbconsole.enabled = true
     }
     production {
         grails.logging.jul.usebridge = false

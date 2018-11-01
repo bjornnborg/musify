@@ -1,0 +1,34 @@
+version: '3'
+networks:
+  my-network:
+    driver: bridge
+
+services:
+  mysql-service:
+    environment:
+    - MYSQL_ROOT_PASSWORD=musify_pass
+    image: 'mysql:5.6'
+    container_name: musify-mysql
+    volumes:
+      #- db_data:/var/lib/mysql
+      - ./db_data:/var/lib/mysql
+    networks:
+      - my-network
+
+  producer:
+    build:
+      dockerfile: ./Dockerfile
+      context: .
+    command: /bin/bash -l -c 'grails run-app'
+    volumes:
+      - .:/budget-on-sight
+    container_name: producer-grails
+    networks:
+      - my-network
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mysql-service
+
+#volumes:
+#  db_data:
