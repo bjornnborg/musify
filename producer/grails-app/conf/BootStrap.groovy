@@ -1,34 +1,27 @@
-import grails.converters.JSON
 import meli.musify.canonic.Song
-import meli.musify.canonic.User
-import meli.musify.canonic.command.PlayerCommand
-import meli.musify.canonic.playlist.Playlist
+import meli.musify.canonic.User;
 
 class BootStrap {
 
+    def userService
+    def songService
+
     def init = { servletContext ->
+        def user = new User()
+        user.login = "bjornnborg@gmail.com"
+        userService.create(user)
 
-        JSON.registerObjectMarshaller(Song){Song s ->
-            /*
-            def props = ["id": s.id] << s.properties
-            return props.findAll {k,v -> k != 'class'}
-            */
-            [id: s.id, name: s.name, album: s.album, singer: s.singer]
-        }
+        def bad = new Song()
+        bad.name = "Bad"
+        bad.singer = "Michael Jackson"
+        bad.album = "MJ Greatest Hits"
+        songService.create(bad)
 
-        JSON.registerObjectMarshaller(User){User u ->
-            [id: u.id, login: u.login]
-        }
-
-        JSON.registerObjectMarshaller(Playlist){ Playlist pl ->
-            [id: pl.id, login: pl.login, name: pl.name, songs: pl.songs.collect{
-                [songId: it.songId, name: it.name, singer: it.singer]
-            }]
-        }
-
-        JSON.registerObjectMarshaller(PlayerCommand){ PlayerCommand c ->
-            [commandType: c.commandType, userId: c.userId, songId: c.songId, playlistId: c.playlistId, atSecond: c.atSecond, increment: c.increment]
-        }
+        def grenade = new Song()
+        grenade.name = "Grenade"
+        grenade.album = "BM Greatest Hits"
+        grenade.singer = "Bruno Mars"
+        songService.create(grenade)
 
     }
     def destroy = {

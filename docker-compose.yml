@@ -1,0 +1,82 @@
+version: '3'
+networks:
+  my-network:
+    driver: bridge
+
+services:
+  redis-service:
+    image: 'redis:5'
+    container_name: musify-redis
+    networks:
+      - my-network
+    ports:
+      - '6379:6379'
+
+  mongo-service:
+    image: 'mongo:3.2'
+    container_name: musify-mongo
+    networks:
+      - my-network
+    ports:
+      - '27017:27017'
+
+  elastic-service:
+    build:
+      dockerfile: ./elastic-search.dockerfile
+      context: .
+    #volumes:
+      #- ./es_data:/es/data
+    networks:
+      - my-network
+    ports:
+      - '9200:9200'
+      - '9300:9300'
+    command: /bin/bash -l -c 'bin/elasticsearch'
+    container_name: musify-elastic
+
+  mysql-service:
+    environment:
+      - MYSQL_ROOT_PASSWORD=musify_pass
+    image: 'mysql:5.6'
+    container_name: musify-mysql
+    volumes:
+      #- db_data:/var/lib/mysql
+      - ./db_data:/var/lib/mysql
+    networks:
+      - my-network
+
+  producer:
+    build:
+      dockerfile: ./producer.dockerfile
+      context: .
+    command: /bin/bash -l -c 'grails run-app'
+    container_name: musify-producer
+    networks:
+      - my-network
+    ports:
+      - '8080:8080'
+    depends_on:
+      - mysql-service
+      - elastic-service
+      - mongo-service
+      - redis-service
+    links:
+      - mysql-service
+      - elastic-service
+      - mongo-service
+      - redis-service
+
+#  consumer:
+#    build:
+#      dockerfile: ./consumer.dockerfile
+#      context: .
+#    command: /bin/bash -l -c 'grails run-app'
+#    container_name: musify-consumer
+#    networks:
+#      - my-network
+#    ports:
+#      - '8081:8080'
+#    depends_on:
+#      - redis-service
+#    links:
+#      - redis-service

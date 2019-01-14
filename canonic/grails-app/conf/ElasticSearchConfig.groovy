@@ -20,7 +20,7 @@ es {
     clusterName = "musify"
     transport.sniffCluster = true
 
-    hosts = [["host": "127.0.0.1"]]
+    hosts = [["host": "musify-elastic"]]
 
     operatorTranslation = [
             'eq':'=',

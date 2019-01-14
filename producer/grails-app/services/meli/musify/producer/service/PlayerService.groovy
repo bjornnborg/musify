@@ -9,7 +9,7 @@ import meli.musify.canonic.exception.InfrastructureException
 @Transactional
 class PlayerService {
 
-    def restClient
+    //def restClient
 
     /**
      * Método que se llama para indicar que un evento se ha generado por el player
@@ -22,6 +22,7 @@ class PlayerService {
      * Envía datos acerca de una canción para ser procesado de forma asíncrona
      */
     private def sendMessage(PlayerCommand command) {
+        /*
         restClient.post(
                 uri: "/messages",
                 headers: ["Content-Type": "application/json"],
@@ -33,6 +34,7 @@ class PlayerService {
                     throw new InfrastructureException(resp.exception.message, resp.exception)
                 }
         )
+        */
     }
 
 }
